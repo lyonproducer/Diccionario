@@ -15,7 +15,7 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        $messages = Message::All();
+        $messages = Message::orderBy('id','DESC')->take(10)->get();
         return response()->json($messages);
     }
 
