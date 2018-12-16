@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {

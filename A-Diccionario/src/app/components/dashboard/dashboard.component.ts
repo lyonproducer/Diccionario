@@ -134,6 +134,7 @@ export class DashboardComponent implements OnInit {
       data=>{
         console.log(data);
         this.getSentences();
+        this.message='';
       }
     );
   }
