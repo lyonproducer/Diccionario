@@ -1,3 +1,49 @@
-<p>
-  dashboard works!
-</p>
+<h3 class="mt-5">Mensajes</h3>
+<hr>
+
+<div class="card">
+
+  <div class="card-body">
+    <ng-container *ngFor="let sentence of messages;index as i;">
+      <p>Mensaje {{i+1}}:</p>
+      <p>{{sentence.sentence}}</p>
+      <hr>
+    </ng-container>
+  </div>
+
+</div>
+
+<div class="card mt-5">
+
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-4">
+          <div class="form-group">
+            <label for="word">Palabra</label>
+            <input required [(ngModel)]="word" type="text" name="name" #name="ngModel" placeholder="Palabra" class="form-control" id="word">
+          </div>
+          <button class="btn btn-primary" (click)="reviewWord()">Revisar</button>
+          <hr>
+
+          <ng-container *ngFor="let suggest of suggestions">
+            <span class="badge badge-primary" style="cursor:pointer"
+            (click)="addToMessage(suggest)">{{suggest}}</span>
+          </ng-container>
+
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <input required [(ngModel)]="message" type="text" name="name" #name="ngModel" placeholder="Mensaje" class="form-control" id="message">
+        </div>
+
+        <button class="btn btn-info" (click)="postMessage()">Enviar</button>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

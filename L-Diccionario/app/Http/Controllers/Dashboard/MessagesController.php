@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 
 class MessagesController extends Controller
 {
@@ -14,7 +15,8 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::All();
+        return response()->json($messages);
     }
 
     /**
@@ -24,7 +26,7 @@ class MessagesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +37,8 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = Message::create($request->all());
+        return response()->json($message);
     }
 
     /**

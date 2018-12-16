@@ -35,5 +35,6 @@ Route::group([
 
     Route::resource('User','Dashboard\UsersController');
     Route::resource('Dictionary','Dictionary\DictionaryController');
+    Route::resource('Message','Dashboard\MessagesController');
 
 });
