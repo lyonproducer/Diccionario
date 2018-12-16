@@ -9,6 +9,7 @@ class Message extends Model
     protected $table = 'messages';
     
     protected $fillable = [
-        'sentence' 
+        'sentence',
+        'user' 
     ];
 }

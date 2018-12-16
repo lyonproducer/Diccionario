@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
 
   dictionary:any=[];
 
+  userName:string;
+
   constructor(
     public dictionaryService:DictionaryService,
     public messageService:MessageService
@@ -28,6 +30,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getDictionary();
     this.getSentences();
+    var user = JSON.parse(localStorage.getItem('user'));
+    this.userName = user.name;
+    console.log(this.userName);
   }
 
   getSentences(){
@@ -119,8 +124,11 @@ export class DashboardComponent implements OnInit {
   postMessage(){
 
     var message = {
-      sentence:this.message
+      sentence:this.message,
+      user:this.userName
     }
+
+    console.log(message);
 
     this.messageService.postMessages(message).subscribe(
       data=>{

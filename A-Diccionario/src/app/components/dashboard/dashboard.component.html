@@ -5,7 +5,7 @@
 
   <div class="card-body">
     <ng-container *ngFor="let sentence of messages;index as i;">
-      <p>Mensaje {{i+1}}:</p>
+      <p>Mensaje: {{i+1}},    Usuario: {{sentence.user}},    Fecha: {{sentence.created_at}}</p>
       <p>{{sentence.sentence}}</p>
       <hr>
     </ng-container>
