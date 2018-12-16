@@ -14,13 +14,14 @@ export class TokenService {
 
   constructor() { }
 
-  handle(token){
-    this.set(token);
+  handle(token,user){
+    this.set(token,user);
     //console.log(this.isValid());
   }
 
-  set(token){
+  set(token,user){
     localStorage.setItem('token',token);
+    localStorage.setItem('user',JSON.stringify(user));
   }
 
   get(){

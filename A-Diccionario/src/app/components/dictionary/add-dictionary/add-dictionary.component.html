@@ -1,0 +1,13 @@
+<h3 *ngIf="!data.editar">Añadir palabra</h3>
+<h3 *ngIf="data.editar">Editar palabra</h3>
+<hr>
+
+<input type="hidden" name="id" #id="ngModel" [(ngModel)]="dictionary.id">
+
+<div class="form-group">
+  <label for="name">Palabra</label>
+  <input required [(ngModel)]="dictionary.word" type="text" name="name" #name="ngModel" placeholder="Palabra" class="form-control">
+</div>
+
+<button class="btn btn-primary" (click)="pushDictionary()">Guardar</button>
+

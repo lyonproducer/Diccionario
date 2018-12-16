@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -39,6 +39,10 @@ class AuthController extends Controller
     public function signup(SignUpRequest $request){
 
         $user = User::create($request->all());
+
+        $userRole=Role::Where('name','=','user')->first();
+        $user->roles()->attach($userRole->id);
+
         return $this->login($request);
     }
 
@@ -83,12 +87,13 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = User::Where('name',auth()->user()->name)->with('roles')->first();
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name
-
+            'user' => $user
         ]);
     }
 

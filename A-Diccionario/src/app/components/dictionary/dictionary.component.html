@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    
+    <div>
+      <h2 class="float-left"> Lista de Palabras </h2>
+      <a class="btn btn-warning text-white float-right " style="background-color: #D9851E" 
+      (click)="onCreate()">
+        Añadir Palabra
+      </a>
+    </div>
+  
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr class="bg-dark text-white">
+          <th scope="col">#</th>
+          <th scope="col">Palabra</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr class="" *ngFor="let dictionary of dictionaryService.dictionaries; index as i;">
+          <th scope="row">{{i}}</th>
+          <th scope="row">
+
+            {{dictionary.word}}
+
+            <a class="btn btn-danger text-white float-right ml-3" 
+            (click)="onDelete(dictionary.id)">
+              <i class="far fa-trash-alt"></i>
+            </a>
+  
+            <a class="btn btn-secondary text-white float-right ml-3" 
+            (click)="onEdit(dictionary)">
+              <i class="far fa-edit"></i>
+            </a>
+  
+          </th>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  

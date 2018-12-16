@@ -15,9 +15,12 @@ class CORS
      */
     public function handle($request, Closure $next)
     {
-        header('Access-Control-Allow-Origin : *');
-        header('Access-Control-Allow-Headers : Content-type, X-Auth-Token, Authorization, Origin');
-        //video quede en 1:03:00
-        return $next($request);
+        $response = $next($request);
+
+        $response->headers->set('Access-Control-Allow-Origin' , '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Application');
+        
+        return $response;  
     }
 }

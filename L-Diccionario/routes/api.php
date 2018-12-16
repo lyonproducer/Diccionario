@@ -33,4 +33,7 @@ Route::group([
     Route::post('sendPasswordResetLink','ResetPasswordController@sendEmail');
     Route::post('resetPassword','ChangePasswordController@process');
 
+    Route::resource('User','Dashboard\UsersController');
+    Route::resource('Dictionary','Dictionary\DictionaryController');
+
 });

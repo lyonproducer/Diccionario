@@ -1,14 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+    use EntrustUserTrait;
+    //use HasRole;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +30,10 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role');
+    }
 
     // Rest omitted for brevity
 
@@ -54,4 +61,6 @@ class User extends Authenticatable implements JWTSubject
 
         $this->attributes['password'] = bcrypt($value);
     }
+
+
 }
