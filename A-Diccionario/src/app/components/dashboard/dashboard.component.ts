@@ -22,10 +22,18 @@ export class DashboardComponent implements OnInit {
 
   userName:string;
 
+  exist:boolean=false;
+  send:boolean=false;
+
   constructor(
     public dictionaryService:DictionaryService,
     public messageService:MessageService
-  ) { }
+  ) {
+
+    setInterval(
+      data=>this.getSentences(),10000
+    );
+  }
 
   ngOnInit() {
     this.getDictionary();
@@ -60,6 +68,7 @@ export class DashboardComponent implements OnInit {
     console.log('ingresado '+this.word);
     this.dictionary.some(element => {
       //empieza a comparar
+      console.log("----------------------------")
       console.log('comparando: ' + element.word);
       if(this.word == element.word){
         console.log('es igual');
@@ -69,7 +78,7 @@ export class DashboardComponent implements OnInit {
       }
       //primero compara si tiene la misma cantidad de letras
       if(this.word.length == element.word.length){
-
+        console.log('misma cantidad de letras');
         var aux=0;
         for(let i=0; i< this.word.length;i++){
           console.log('comparando', this.word[i]);
@@ -89,36 +98,60 @@ export class DashboardComponent implements OnInit {
       }else
 
       if(this.word.length != element.word.length){
-
+        console.log('diferente cantidad de letras');
         var aux=0;
+        var diferent=0;
+        var firstLetter=false;
         for(let i=0; i< this.word.length;i++){
           console.log('comparando', this.word[i]);
+
+          if(this.word[0]!=element.word[0]){
+            if(this.word[i]==element.word[i+1]){
+              aux++;
+              firstLetter=true;
+            }
+          }
           if(this.word[i]==element.word[i]){
             aux++;
-          }
+          }else
+          diferent++;
         }
 
+        console.log('firstLetter '+ firstLetter);
         console.log('aux '+ aux);
+        console.log('diferent '+ diferent);
 
-        if(aux == this.word.length-1){
+        if(diferent == 1 && aux == element.word.length-1 && firstLetter==true ){
           this.suggestions.push(element.word);
           console.log('se encontro -1: '+ element.word);
-        }
+        }else
+
+        if(aux == this.word.length-1 || aux == element.word.length-1){
+          this.suggestions.push(element.word);
+          console.log('se encontro -1: '+ element.word);
+        }else
+        this.exist = true;
 
       }
 
-
     });
 
-    this.word='';
+    if(this.exist){
+      this.send=true;
+    }
+
 
   }
 
   addToMessage(data){
+    this.word='';
+    this.send=false;
+    this.suggestions=[];
     if(this.message==''){
       this.message = this.message + data;
     }else
     this.message = this.message + ' ' + data;
+
   }
 
   postMessage(){

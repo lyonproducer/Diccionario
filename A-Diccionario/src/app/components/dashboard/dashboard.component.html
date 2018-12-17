@@ -24,6 +24,8 @@
             <input required [(ngModel)]="word" type="text" name="name" #name="ngModel" placeholder="Palabra" class="form-control" id="word">
           </div>
           <button class="btn btn-primary" (click)="reviewWord()">Revisar</button>
+          <button class="btn btn-primary float-right" (click)="addToMessage(word);" 
+          *ngIf="send">Concatenar</button>
           <hr>
 
           <ng-container *ngFor="let suggest of suggestions">
